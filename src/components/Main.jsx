@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Fade from '@mui/material/Fade';
 import Autocomplete from '@mui/material/Autocomplete';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
@@ -39,8 +38,12 @@ const Main = () => {
     };
 
     React.useEffect(() => {
-        const filteredCities = cities.filter((c) => c.toLowerCase().startsWith(city.toLowerCase()));
-        setSuggestions(filteredCities);
+        if (city) {
+            const filteredCities = cities.filter((c) => c.toLowerCase().startsWith(city.toLowerCase()));
+            setSuggestions(filteredCities);
+        } else {
+            setSuggestions([]);
+        }
     }, [city]);
 
     const handleSuggestionClick = (c) => {
@@ -102,12 +105,12 @@ const Main = () => {
                                 </Card>
                             </Fade>
                         ) : (
-                            <Typography variant="h6" align="center" sx={{ mt: 5 }}>
+                            <Typography variant="h6" align="center" sx={{ mt: 2 }}>
                                 No data to display yet, please enter a city name and click submit.
                             </Typography>
                         )}
                     </Box>
-                    <Box flex={1} p={2} boxShadow={3}>
+                    <Box flex={1} p={2} boxShadow={3} sx={{ mt: 2 }}>
                         <img src={image} alt="Description" style={{ width: '100%', borderRadius: '8px' }} />
                     </Box>
                 </Box>
